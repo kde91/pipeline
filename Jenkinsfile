@@ -31,7 +31,7 @@ pipeline{
             }
           } 
         }
-          
+      }   
          stage ('release'){
              steps{
             echo 'I am Staging...............'
