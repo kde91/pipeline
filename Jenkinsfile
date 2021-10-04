@@ -32,7 +32,7 @@ post {
     }
     
     failure {
-        mail to: 'karnajit.de@capgemini.com',
+        mail to: "${emailIds}"',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
              body: "Something is wrong with ${env.BUILD_URL}"
     }
