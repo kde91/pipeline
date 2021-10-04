@@ -17,9 +17,11 @@ pipeline{
              }
         }
     }
+    environment {
+        emailIds = "karnajit.de@capgemini.com,vijaydocs100@gmail.com"   
+}
    
 post {
-    def emailIds = "karnajit.de@capgemini.com,vijaydocs100@gmail.com"
     success {
         mail to: '${emailIds}',
              subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
