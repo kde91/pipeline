@@ -21,13 +21,13 @@ pipeline{
 post {
     
     success {
-        mail to: 'kdwebs91@gmail.com',
+        mail to: 'karnajit.de@capgemini.com',
              subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
-             body: "Something is wrong with ${env.BUILD_URL}"
+             body: "You can check your logs for this successful build in : ${env.BUILD_URL}"
     }
     
     failure {
-        mail to: 'kdwebs91@gmail.com',
+        mail to: 'karnajit.de@capgemini.com',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
              body: "Something is wrong with ${env.BUILD_URL}"
     }
