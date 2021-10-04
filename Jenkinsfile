@@ -21,7 +21,7 @@ pipeline{
 post {
     
     success {
-        mail to: 'karnajit.de@capgemini.com',
+        mail to: 'karnajit.de@capgemini.com,vijaydocs100@gmail.com',
              subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
              body: "You can check your logs for this successful build in : ${env.BUILD_URL}"
     }
