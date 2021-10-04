@@ -19,12 +19,6 @@ pipeline{
     }
    
 post {
-    always { 
-            echo 'Build Success'
-        }
-        aborted {
-            echo 'Build aborted'
-        }
     failure {
         mail to: 'kdwebs91@gmail.com',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
