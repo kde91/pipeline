@@ -11,27 +11,6 @@ pipeline{
             echo 'I am in test Stage...............'
             }
         }
-        stage ('staging'){
-            steps{
-            echo 'I am Staging...............'
-            }
-        }
-      
-      stage ('parallel'){
-        parallel{
-          stage('Unit Test'){
-            steps{
-              echo "Running unit test"
-            }
-          } 
-          
-      stage('Int Test'){
-            steps{
-              echo "Running Int test"
-            }
-          } 
-        }
-      }   
          stage ('release'){
              steps{
             echo 'I am Staging...............'
@@ -41,6 +20,12 @@ pipeline{
    
 }
 post {
+    always { 
+            echo 'Build Success'
+        }
+        aborted {
+            echo 'Build aborted'
+        }
     failure {
         mail to: 'kdwebs91@gmail.com',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
