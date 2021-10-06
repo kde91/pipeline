@@ -12,6 +12,7 @@ node {
         finally {            
                 mail to: 'karnajit.de@capgemini.com',
                 subject: " ${currentBuild.result} || Pipeline Details: ${currentBuild.fullDisplayName}",
-                body: "You can check the logs for this build in <a href='${env.BUILD_URL}'>URL</a> and current result is \n ${currentBuild.result}"
+                body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                      <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
           }                     
   }    
