@@ -9,10 +9,9 @@ node {
             echo 'This will run only if failed'
             currentBuild.result = 'FAILURE'
         }  
-        def infotext = ""[Click here]$(env.BUILD_URL) ""
         finally {            
                 mail to: 'karnajit.de@capgemini.com',
                 subject: " ${currentBuild.result} || Pipeline Details: ${currentBuild.fullDisplayName}",
-                body: "You can check the logs for this build in ${env.BUILD_URL}" + "\n" + "and current result is ${currentBuild.result}"
+                body: "You can check the logs for this build in" + "<a href=${env.BUILD_URL}> Click Here </a>" + "\n" + "and current result is ${currentBuild.result}"
           }                     
   }    
