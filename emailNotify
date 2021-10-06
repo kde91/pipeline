@@ -1,0 +1,16 @@
+node {
+        try {
+        stage('Init') {
+            echo "Init Stage"
+        }       
+        currentBuild.result = 'SUCCESS'           
+        } catch (Exception err) {
+            echo 'This will run only if failed'
+            currentBuild.result = 'FAILURE'
+        }  
+        finally {            
+                mail to: 'karnajit.de@capgemini.com',
+                subject: " ${currentBuild.result} || Pipeline Details: ${currentBuild.fullDisplayName}",
+                body: "You can check the logs for this build in ${env.BUILD_URL} and current result is ${currentBuild.result}"
+          }                     
+  }    
