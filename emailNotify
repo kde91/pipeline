@@ -13,7 +13,6 @@ node {
             currentBuild.currentResult == 'ABORTED'
         }  
         finally {     
-            echo ${currentBuild.currentResult}
             if ( currentBuild.result == "SUCCESS" || currentBuild.currentResult == "ABORTED" )
             {
                 mail to: 'kdwebs91@gmail.com',
