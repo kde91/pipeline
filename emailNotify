@@ -12,7 +12,7 @@ node {
             currentBuild.result = 'FAILURE'
         }  
         finally {     
-            if ( currentBuild.result == "FAILURE" )
+            if ( currentBuild.result == "SUCCESS" || currentBuild.currentResult == "ABORTED" )
             {
                 mail to: 'kdwebs91@gmail.com',
                 subject: " ${currentBuild.result} || Pipeline Details: ${currentBuild.fullDisplayName}",
