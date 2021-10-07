@@ -1,9 +1,11 @@
 node {
         try {
-        stage('Init') {
-            sh "exit 1"
+        stage('Init') {           
             echo "Init Stage"
-        }       
+        } 
+        stage('Gate') {
+        echo "Gate Stage"
+        }
         currentBuild.result = 'SUCCESS'           
         } catch (Exception err) {
             echo 'This will run only if failed'
@@ -12,6 +14,6 @@ node {
         finally {            
                 mail to: 'kdwebs91@gmail.com',
                 subject: " ${currentBuild.result} || Pipeline Details: ${currentBuild.fullDisplayName}",
-                body: "You can check the logs for this build in ${env.BUILD_URL}" + "\n" + "and current result is ${currentBuild.result}" + "\n" + "${BUILD_LOG, maxLines=20, escapeHtml=false}"
+                body: "You can check the logs for this build in ${env.BUILD_URL}" + "\n" + "and current result is ${currentBuild.result}"
           }                     
   }    
