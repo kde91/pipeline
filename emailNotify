@@ -2,7 +2,6 @@ node {
         try {
         stage('Init') {           
             echo "Init Stage"
-            sh "sleep 20"
         } 
         stage('Gate') {
         echo "Gate Stage"
@@ -13,6 +12,7 @@ node {
             currentBuild.result = 'FAILURE'
         }  
         finally {     
+            echo ${currentBuild.currentResult}
             if ( currentBuild.result == "SUCCESS" || currentBuild.currentResult == "ABORTED" )
             {
                 mail to: 'kdwebs91@gmail.com',
