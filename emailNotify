@@ -11,7 +11,7 @@ node {
         } catch (Exception err) {
             echo 'This will run only if failed'
             currentBuild.result = 'FAILURE'
-            currentBuild.currentResult == 'ABORTED'
+            currentBuild.currentResult = 'ABORTED'
         }  
         finally {     
             if ( currentBuild.result == "SUCCESS" || currentBuild.currentResult == "ABORTED" )
