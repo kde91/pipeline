@@ -14,7 +14,7 @@ node {
   
         }  
         finally {                 
-                mimeType: 'text/html'
+                mimeType: 'html/text'
                 mail to: 'kdwebs91@gmail.com',
                 subject: " ${currentBuild.result} ${currentBuild.currentResult}|| Pipeline Details: ${currentBuild.fullDisplayName}",
                 body: "You can check the logs for this build in <a href='${env.BUILD_URL}'> Click </a> " + "\n" + "and current result is ${currentBuild.result}"             
