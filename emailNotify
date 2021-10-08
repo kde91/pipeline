@@ -15,7 +15,7 @@ node {
         finally {                 
                 mail to: 'kdwebs91@gmail.com',
                 subject: " ${currentBuild.result} ${currentBuild.currentResult}|| Pipeline Details: ${currentBuild.fullDisplayName}",
-                body: """<p> You can check the logs for this build in <a href='${env.BUILD_URL}'>[${env.BUILD_URL}]</a></p>""" + "\n" + "and current result is ${currentBuild.result}"             
+                body: """<p> You can check the logs for this build in <a href='${env.BUILD_URL}'>[{Click Here}]</a></p>""" + "\n" + "and current result is ${currentBuild.result}"             
                
           }                    
   } 
