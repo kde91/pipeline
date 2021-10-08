@@ -22,6 +22,7 @@ node {
         try {
         stage('Init') {           
             echo "Init Stage"
+            sh "exit 1"
         } 
         stage('Gate') {
         echo "Gate Stage"
