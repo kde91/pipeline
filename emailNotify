@@ -1,24 +1,33 @@
+def notifySuccessful() {
+  emailext (
+      subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      mail to: 'kdwebs91@gmail.com' 
+    )
+}
+
+def notifyFailed() {
+  emailext (
+      subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      mail to: 'kdwebs91@gmail.com'
+    )
+}
+
 node {
         try {
         stage('Init') {           
             echo "Init Stage"
-            sh "sleep 20"
         } 
         stage('Gate') {
         echo "Gate Stage"
         }
-        currentBuild.result = 'SUCCESS'           
+        notifySuccessful()           
         } catch (Exception err) {
             echo 'This will run only if failed'
-            currentBuild.result = 'FAILURE'
-            currentBuild.currentResult = 'ABORTED'
+            notifyFailed()           
         }  
-        finally {     
-            if ( currentBuild.result == "SUCCESS" || currentBuild.currentResult == "ABORTED" )
-            {
-                mail to: 'kdwebs91@gmail.com',
-                subject: " ${currentBuild.result} ${currentBuild.currentResult}|| Pipeline Details: ${currentBuild.fullDisplayName}",
-                body: "You can check the logs for this build in ${env.BUILD_URL}" + "\n" + "and current result is ${currentBuild.result}"              
-             }   
-          }                     
+                        
   }    
