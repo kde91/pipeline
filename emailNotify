@@ -1,13 +1,13 @@
 node {	
+  parameters { booleanParam(name: 'ISEMAILENABLED', defaultValue: true, description: 'Do you need email notification ?') }
+  echo "Value is : ${params.ISEMAILENABLED}"
 	try {
 	stage('Init') { 
 	echo "Init Stage"
 	} 
 	stage('Gate') {
 	echo "Gate Stage"
-	}
-	parameters { booleanParam(name: 'ISEMAILENABLED', defaultValue: true, description: 'Do you need email notification ?') }
-	echo "Value is : ${params.ISEMAILENABLED}"
+	}	
 	currentBuild.result = 'SUCCESS' 
 	} catch (Exception err) {
 	echo 'This will run only if failed'
