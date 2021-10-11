@@ -1,9 +1,10 @@
 def notifySuccessful() {
   emailext attachLog: true, 
-  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p>""", 
+  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p>""", 
     compressLog: true,
     recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
      [$class: 'RequesterRecipientProvider']],
+    replyTo: 'do-not-reply@company.com', 
     subject: "Status: ${currentBuild.result?:'SUCCESS'} - job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
     to: 'kdwebs91@gmail.com'
     
@@ -11,10 +12,11 @@ def notifySuccessful() {
 
 def notifyFailed() {
   emailext attachLog: true, 
-  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILjD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p>""", 
+  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p>""", 
     compressLog: true,
     recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
      [$class: 'RequesterRecipientProvider']],
+    replyTo: 'do-not-reply@company.com', 
     subject: "Status: ${currentBuild.result?:'FAILURE'} - job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
     to: 'kdwebs91@gmail.com'
 }
@@ -31,7 +33,6 @@ node {
         notifySuccessful()           
         } catch (Exception err) {
             echo 'This will run only if failed'
-            echo "\${BUILD_LOG}"
             notifyFailed()           
         }  
                         
