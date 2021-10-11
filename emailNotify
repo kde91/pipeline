@@ -1,39 +1,19 @@
-def notifySuccessful() {
-  emailext attachLog: true, 
-  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p>""", 
-    compressLog: true,
-    recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-     [$class: 'RequesterRecipientProvider']],
-    replyTo: 'do-not-reply@company.com', 
-    subject: "Status: ${currentBuild.result?:'SUCCESS'} - job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
-    to: 'kdwebs91@gmail.com'
-    
-}
-
-def notifyFailed() {
-  emailext attachLog: true, 
-  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p>""", 
-    compressLog: true,
-    recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-     [$class: 'RequesterRecipientProvider']],
-    replyTo: 'do-not-reply@company.com', 
-    subject: "Status: ${currentBuild.result?:'FAILURE'} - job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
-    to: 'kdwebs91@gmail.com'
-}
-
-node {
-        try {
-        stage('Init') {           
-            echo "Init Stage"
-            sh "exit 1"
-        } 
-        stage('Gate') {
-        echo "Gate Stage"
-        }
-        notifySuccessful()           
-        } catch (Exception err) {
-            echo 'This will run only if failed'
-            notifyFailed()           
-        }  
-                        
-  }    
+node {	
+	try {
+	stage('Init') { 
+	echo "Init Stage"
+	} 
+	stage('Gate') {
+	echo "Gate Stage"
+	}
+	currentBuild.result = 'SUCCESS' 
+	} catch (Exception err) {
+	echo 'This will run only if failed'
+	currentBuild.result = 'FAILURE'
+	} 
+	finally { 
+	mail to: 'kdwebs91@gmail.com',
+	subject: " ${currentBuild.result} ${currentBuild.currentResult}|| Pipeline Details: ${currentBuild.fullDisplayName}",
+	body: "You can check the logs for this build in ${env.BUILD_URL}" + "\n" + "and current result is ${currentBuild.result}" 
+	} 
+	} 
