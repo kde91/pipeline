@@ -33,7 +33,7 @@ node {
         notifySuccessful()           
         } catch (Exception err) {
             echo 'This will run only if failed'
-            echo ${BUILD_LOG}
+            echo "${BUILD_LOG}"
             notifyFailed()           
         }  
                         
