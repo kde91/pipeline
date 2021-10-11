@@ -12,7 +12,7 @@ def notifySuccessful() {
 
 def notifyFailed() {
   emailext attachLog: true, 
-  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p> ${BUILD_LOG, maxLines=50, escapeHtml=false}""", 
+  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p> <p>${BUILD_LOG, maxLines=50, escapeHtml=false}</p>""", 
     compressLog: true,
     recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
      [$class: 'RequesterRecipientProvider']],
