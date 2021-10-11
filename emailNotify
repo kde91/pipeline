@@ -6,19 +6,19 @@ def notifySuccessful() {
      [$class: 'RequesterRecipientProvider']],
     replyTo: 'do-not-reply@company.com', 
     subject: "Status: ${currentBuild.result?:'SUCCESS'} - job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
-    to: 'kdwebs91@gmail.com,ashok-kumar.gandham@capgemini.com,kushal.karmakar@capgemini.com,chaitanya.a.reddy@capgemini.com,vijay.q.kumar@capgemini.com'
+    to: 'kdwebs91@gmail.com'
     
 }
 
 def notifyFailed() {
   emailext attachLog: true, 
-  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p> <p>${BUILD_LOG, maxLines=50, escapeHtml=false}</p>""", 
+  body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p><p>View console output at "<a href="${env.BUILD_URL}"> ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> <p><i>(Build log is attached.)</i></p> <p>${BUILD_LOG_REGEX, regex="^.*?BUILD FAILED.*?$", linesBefore=0, linesAfter=10, maxMatches=5, showTruncatedLines=false, escapeHtml=true}</p>""", 
     compressLog: true,
     recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
      [$class: 'RequesterRecipientProvider']],
     replyTo: 'do-not-reply@company.com', 
     subject: "Status: ${currentBuild.result?:'FAILURE'} - job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
-    to: 'kdwebs91@gmail.com,ashok-kumar.gandham@capgemini.com,kushal.karmakar@capgemini.com,chaitanya.a.reddy@capgemini.com,vijay.q.kumar@capgemini.com'
+    to: 'kdwebs91@gmail.com'
 }
 
 node {
