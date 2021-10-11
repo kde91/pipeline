@@ -1,8 +1,4 @@
-node {	  
-	properties([parameters([booleanParam(name: 'EMAIL', defaultValue: false),])])
-  	echo "Value is : ${params.EMAIL}"
-	value = params.EMAIL
-	echo " HELLO $value"
+node {	  	
 	try {
 	stage('Init') { 
 	echo "Init Stage"
@@ -15,7 +11,11 @@ node {
 	echo 'This will run only if failed'
 	currentBuild.result = 'FAILURE'
 	} 	
-	finally { 		
+	finally { 	
+	properties([parameters([booleanParam(name: 'EMAIL', defaultValue: false),])])
+  	echo "Value is : ${params.EMAIL}"
+	value = params.EMAIL
+	echo " HELLO $value"
 	if (value == "true") {
 	mail to: 'kdwebs91@gmail.com',	
 	subject: " ${currentBuild.result} ${currentBuild.currentResult}|| Pipeline Details: ${currentBuild.fullDisplayName}",
