@@ -1,6 +1,6 @@
 node {	
-  parameters { booleanParam(name: 'ISEMAILENABLED', defaultValue: true, description: 'Do you need email notification ?') }
-  echo "Value is : ${params.ISEMAILENABLED}"
+  properties([parameters([booleanParam(name: 'EMAIL', defaultValue: false),])])
+  echo "Value is : ${params.EMAIL}"
 	try {
 	stage('Init') { 
 	echo "Init Stage"
