@@ -1,7 +1,7 @@
 node {	  
 	properties([parameters([booleanParam(name: 'EMAIL', defaultValue: false),])])
   	echo "Value is : ${params.EMAIL}"
-	def value = ${params.EMAIL}
+	value = ${params.EMAIL}
 	echo "$value"
 	try {
 	stage('Init') { 
