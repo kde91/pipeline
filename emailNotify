@@ -10,9 +10,7 @@ node {
 	} catch (Exception err) {
 	echo 'This will run only if failed'
 	currentBuild.result = 'FAILURE'
-	} 
-	parameters { booleanParam(name: 'ISEMAILENABLED', defaultValue: true, description: 'Do you need email notification ?') }
-	echo "Value is : ${params.ISEMAILENABLED}"
+	} 	
 	finally { 		
 	mail to: 'kdwebs91@gmail.com',
 	subject: " ${currentBuild.result} ${currentBuild.currentResult}|| Pipeline Details: ${currentBuild.fullDisplayName}",
