@@ -1,4 +1,6 @@
 node {	  
+	properties([parameters([booleanParam(name: 'EMAIL', defaultValue: false),])])
+  	echo "Value is : ${params.EMAIL}"
 	try {
 	stage('Init') { 
 	echo "Init Stage"
@@ -10,9 +12,7 @@ node {
 	} catch (Exception err) {
 	echo 'This will run only if failed'
 	currentBuild.result = 'FAILURE'
-	} 
-	properties([parameters([booleanParam(name: 'EMAIL', defaultValue: false),])])
-  	echo "Value is : ${params.EMAIL}"
+	} 	
 	finally { 		
 	if (params.EMAIL == "true") {
 	mail to: 'kdwebs91@gmail.com',	
